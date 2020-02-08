@@ -16,7 +16,7 @@ var firebaseConfig = {
 
 //google api config
 var googleConfig = {
-  apikey: AIzaSyCCa30P9-jhu-MNAF8GlZ1hP5nSF1Lz_jo
+  apikey: "AIzaSyCCa30P9-jhu-MNAF8GlZ1hP5nSF1Lz_jo"
 }
 
 
