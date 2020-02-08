@@ -36,7 +36,7 @@ app.get('/latlong', function(req, res, next) {
      req.socket.remoteAddress ||
      (req.connection.socket ? req.connection.socket.remoteAddress : null);
   let geo = geoip.lookup(ip);
-  res.send(geo);
+  res.send(geo.ll);
 });
 
 
