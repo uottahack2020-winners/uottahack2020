@@ -27,7 +27,7 @@ app.get('/', function(req, res, next) {
   res.send('Hello');
 })
 
-app.post('/users/drivers', async function(req, res, next){
+app.post('/users/drivers', function(req, res, next){
 
   var db = firebase.firestore();
   //use id to post
