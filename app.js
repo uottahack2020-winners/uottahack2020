@@ -25,7 +25,7 @@ function init() {
 
 app.get('/', function(req, res, next) {
   res.send('Hello');
-})
+});
 
 app.post('/users/drivers', function(req, res, next){
 
@@ -48,6 +48,20 @@ app.post('/users/drivers', function(req, res, next){
     })
 
 });
+
+app.get('/users/drivers', function(req,res, next) {
+
+});
+
+app.get('/users/business', function(req,res, next) {
+
+});
+
+app.post('/users/business', function(req,res, next) {
+
+});
+
+
 
 // just used this to test, should move somewhere else
 
