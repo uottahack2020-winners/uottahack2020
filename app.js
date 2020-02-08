@@ -17,6 +17,8 @@ var config = {
   databaseURL: "https://uottahack2020-18263.firebaseio.com",
   projectId: "uottahack2020-18263",
   storageBucket:"uottahack2020-18263.appspot.com",
+  messagingSenderId: "1098902235369",
+  appId: "1:1098902235369:web:392eddfa9eac4d53996878"
 };
 
 
