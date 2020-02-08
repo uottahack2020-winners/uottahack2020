@@ -3,13 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var firebase = require("firebase");
+var app = express();
 // required for side effects <= what does that mean google?
-require('firebase/firestore');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 //config
 var firebaseConfig = {
   apiKey: "AIzaSyCyN99QGRjjCkT7ljW6_fzhGCuNohxfE8Q",
@@ -20,10 +17,11 @@ var firebaseConfig = {
   messagingSenderId: "1098902235369",
   appId: "1:1098902235369:web:392eddfa9eac4d53996878"
 };
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
