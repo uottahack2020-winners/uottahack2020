@@ -58,7 +58,23 @@ app.get('/users/business', function(req,res, next) {
 });
 
 app.post('/users/business', function(req,res, next) {
-
+  var db = firebase.firestore();
+  //use id to post
+  db.collection('users').doc('users').collection('business').doc(req.query.uid)
+    .set({
+      email: req.query.email,
+      name: req.query.name,
+      userType: req.query.userType,
+      location: req.query.location
+    })
+    .then(function(){
+       res.send(200);
+       console.log('success');
+    })
+    .catch(function(error) {
+      res.send(404);
+      console.error("Error writing");
+    })
 });
 
 
