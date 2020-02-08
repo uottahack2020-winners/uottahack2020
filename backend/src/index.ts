@@ -1,10 +1,10 @@
-import * as Koa from "koa";
-import * as Router from "koa-router";
-import * as koaBody from 'koa-body';
+import Koa from "koa";
+import Router from "koa-router";
+import koaBody from 'koa-body';
 //import * as cors from '@koa/cors';
 import * as mongoose from 'mongoose';
 
-import * as koaLogger from "koa-logger";
+import koaLogger from "koa-logger";
 import * as json from "koa-json";
 
 import { logger } from './services';
@@ -20,7 +20,7 @@ const cors = require('@koa/cors');
 
 const app = new Koa();
 
-app.use(koaBody())
+app.use(koaBody());
 app.use(koaValidator());
 app.use(cors());
 app.use(koaBunyanLogger(logger));
