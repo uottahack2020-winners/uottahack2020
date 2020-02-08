@@ -11,16 +11,17 @@ require('firebase/firestore');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 //config
-var config = {
+var firebaseConfig = {
   apiKey: "AIzaSyCyN99QGRjjCkT7ljW6_fzhGCuNohxfE8Q",
-  authDomain: "https://uottahack2020-18263.firebaseapp.com",
+  authDomain: "uottahack2020-18263.firebaseapp.com",
   databaseURL: "https://uottahack2020-18263.firebaseio.com",
   projectId: "uottahack2020-18263",
-  storageBucket:"uottahack2020-18263.appspot.com",
+  storageBucket: "uottahack2020-18263.appspot.com",
   messagingSenderId: "1098902235369",
   appId: "1:1098902235369:web:392eddfa9eac4d53996878"
 };
-
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 var app = express();
 
@@ -42,7 +43,6 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-firebase.initializeApp(config);
 // just used this to test, should move somewhere else
 
 // var db = firebase.firestore();
