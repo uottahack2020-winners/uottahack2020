@@ -17,8 +17,6 @@ var firebaseConfig = {
   appId: "1:1098902235369:web:392eddfa9eac4d53996878"
 };
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -31,9 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -84,5 +79,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-module.exports = app;
+it
+app.listen();
