@@ -31,7 +31,7 @@ app.post('/users/drivers', async function(req, res, next){
 
   var db = firebase.firestore();
   //use id to post
-  await db.collection('users').doc('users').collection('drivers').doc(req.body.uid)
+  db.collection('users').doc('users').collection('drivers').doc(req.body.uid)
     .set({
       email: req.body.email,
       firstname: req.body.firstName,
