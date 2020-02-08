@@ -8,23 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 
-// The Firebase Admin SDK to access the Firebase Realtime Database.
-var admin = require('firebase-admin');
-
-var serviceAccount = require("./uottahack2020-18263-firebase-adminsdk-fjx5g-1db522b766.json");
-// Initialize the app with a service account, granting admin privileges
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://uottahack2020-18263.firebaseio.com"
-});
-
-// As an admin, the app has access to read and write all data, regardless of Security Rules
-var db = admin.database();
-var ref = db.ref("restricted_access/secret_document");
-ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
-});
-
+//initialize express
 var app = express();
 
 // view engine setup
@@ -39,6 +23,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+
+// The Firebase Admin SDK to access the Firebase Realtime Database.
+var admin = require('firebase-admin');
+
+var serviceAccount = require("./uottahack2020-18263-firebase-adminsdk-fjx5g-1db522b766.json");
+// Initialize the app with a service account, granting admin privileges
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://uottahack2020-18263.firebaseio.com"
+});
+
+// As an admin, the app has access to read and write all data, regardless of Security Rules
+var db = admin.database();
+var ref = db.ref("/userds/");
+ref.once("value", function(snapshot) {
+  console.log(snapshot.val());
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
