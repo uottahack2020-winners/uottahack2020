@@ -21,13 +21,14 @@ var googleConfig = {
 
 
 init();
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
 
 // Initialize Firebase
 function init() {
   firebase.initializeApp(firebaseConfig);
-  let db = firebase.database();
+  var db = firebase.database();
 };
-
 
 app.get('/', function(req, res, next) {
   res.send('Hello');
