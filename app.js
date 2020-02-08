@@ -14,6 +14,10 @@ var firebaseConfig = {
   appId: "1:1098902235369:web:392eddfa9eac4d53996878"
 };
 
+//google api config
+var googleConfig = {
+  apikey: AIzaSyCCa30P9-jhu-MNAF8GlZ1hP5nSF1Lz_jo
+}
 
 
 init();
@@ -36,9 +40,29 @@ app.get('/latlong', function(req, res, next) {
      req.socket.remoteAddress ||
      (req.connection.socket ? req.connection.socket.remoteAddress : null);
   let geo = geoip.lookup(ip);
-  res.json({latLong: geo.ll});
+  res.write(geo.ll);
 });
 
+//Rest API CRUD stuff
+app.get('/items', function(req, res,next) {
+  var itemsRef = db.ref('items');
+  itemsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+      res.write(childData);
+    });
+  });
+});
+
+app.get('/items/:id', function(req, res, next) {
+  const itemId = req.params.id;
+  const item = data.find(_item => _item.id === itemId);
+  if (item) {
+    res.json(item);
+  } else {
+    res.json({ message: `item ${itemId} doesn't exist`})
+  }
+});
 
 app.post('/users/drivers', function(req, res, next){
 
