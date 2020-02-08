@@ -32,41 +32,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Row(children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 10),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: inputDecoration,
-                        onChanged: (value) {
-                          firstName = value;
-                        },
-                      ),
-                    ),
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: FlutterLogo(
+                    size: 150,
                   ),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: inputDecoration,
-                        onChanged: (value) {
-                          lastName = value;
-                        },
-                      ),
-                    ),
-                  ),
-                ]),
+                ),
               ),
+              Row(children: <Widget>[
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      decoration: InputDecorationWrapper(hint: 'First Name').getInputDecoration(),
+                      onChanged: (value) {
+                        firstName = value;
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      decoration: InputDecorationWrapper(hint: 'Last Name').getInputDecoration(),
+                      onChanged: (value) {
+                        lastName = value;
+                      },
+                    ),
+                  ),
+                ),
+              ]),
               Container(
-                margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
+                margin: EdgeInsets.fromLTRB(15, 15, 15, 10),
                 child: TextField(
                     keyboardType: TextInputType.emailAddress,
                     textAlign: TextAlign.center,
-                    decoration: inputDecoration,
+                    decoration: InputDecorationWrapper(hint: 'Email').getInputDecoration(),
                     onChanged: (value) {
                       email = value;
                     }),
@@ -76,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: TextField(
                   obscureText: false,
                   textAlign: TextAlign.center,
-                  decoration: inputDecoration,
+                  decoration: InputDecorationWrapper(hint: 'Password').getInputDecoration(),
                   onChanged: (value) {
                     password = value;
                   },
@@ -96,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                       title: Text(
-                        'business'
+                        'Business'
                       ),
                     ),
                   ),
@@ -112,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                       title: Text(
-                        'driver'
+                        'Driver'
                       ),
                     ),
                   )

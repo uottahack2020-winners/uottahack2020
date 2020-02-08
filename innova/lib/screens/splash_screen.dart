@@ -11,11 +11,24 @@ class SplashScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'App Name',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(75, 0, 0, 20),
+                    child: Row(
+                      children: <Widget>[
+                        Hero(
+                          tag: 'logo',
+                          child: FlutterLogo(
+                            size: 50,
+                          ),
+                        ),
+                        Text(
+                          'App Name',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   PillButton(
