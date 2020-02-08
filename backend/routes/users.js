@@ -10,9 +10,22 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/users/drivers/:id', function(req, res, next){
+router.post('/users/drivers/?id', function(req, res, next){
     //use id to post
-    db.collection('users/drivers/'+ req.params.id);
+    db.collection('users').doc('users').collection('drivers').doc(req.params.uid)
+      .set({
+        name: req.params.name,
+        email: req.params.email,
+        userType: req.params.userType
+      })
+      .then(function(){
+         res.send(200);
+         console.log('success');
+      })
+      .catch(function(error) {
+        res.send(69);
+        console.error("Error writing");
+      })
 
 });
 

@@ -47,8 +47,6 @@ db.collection('users').get()
       }).catch((err) => {
          console.log('Error getting documents', err);
       });
-    
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
