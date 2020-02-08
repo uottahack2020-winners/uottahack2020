@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for uottahack2020",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "david meribe",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^2.2.3",
+    "bunyan": "^1.8.12",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^8.0.7",
+    "koa-static": "^5.0.0",
+    "mongoose": "^5.8.11"
+  },
+  "devDependencies": {
+    "@types/koa-logger": "^3.1.1"
+  }
+}
