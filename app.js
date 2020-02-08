@@ -35,6 +35,10 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.get('/', function(req, res, next) {
+  
+});
+
 app.post('/users/drivers', function(req, res, next){
 
   var db = firebase.firestore();
