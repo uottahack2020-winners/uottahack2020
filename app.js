@@ -40,6 +40,28 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.post('/users/drivers', function(req, res, next){
+
+  var db = firebase.firestore();
+  //use id to post
+  db.collection('users').doc('users').collection('drivers').doc(req.body.uid)
+    .set({
+      email: req.body.email,
+      firstname: req.body.firstName,
+      lastname: req.body.lastName,
+      userType: req.body.userType
+    })
+    .then(function(){
+       res.send(200);
+       console.log('success');
+    })
+    .catch(function(error) {
+      res.send(404);
+      console.error("Error writing");
+    })
+
+});
+
 // just used this to test, should move somewhere else
 
 // var db = firebase.firestore();
