@@ -63,6 +63,4 @@ app.post('/users/drivers', async function(req, res, next){
 
 // error handler
 
-app.listen(3000, function(){
-
-});
+module.exports = app;
