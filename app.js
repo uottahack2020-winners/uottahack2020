@@ -1,6 +1,7 @@
 var express = require('express');
 var firebase = require("firebase");
 var app = express();
+var geoip = require('geoip-lite');
 
 //firebase config
 var firebaseConfig = {
@@ -29,11 +30,13 @@ app.get('/', function(req, res, next) {
 })
 
 app.get('/latlong', function(req, res, next) {
+  //get ip address, feed into a geolookup
   var ip = req.headers['x-forwarded-for'] || 
      req.connection.remoteAddress || 
      req.socket.remoteAddress ||
      (req.connection.socket ? req.connection.socket.remoteAddress : null);
-  res.send(ip);
+  let geo = geoip.lookup(ip);
+  res.send(geo);
 });
 
 
