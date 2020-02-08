@@ -16,6 +16,8 @@ router.post('/users/drivers/?id', function(req, res, next){
       .set({
         name: req.params.name,
         email: req.params.email,
+        firstname: req.params.firstName,
+        lastname: req.params.lastName,
         userType: req.params.userType
       })
       .then(function(){
