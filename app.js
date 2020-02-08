@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var firebase = require("firebase");
 var app = express();
-// required for side effects <= what does that mean google?
 
 //config
 var firebaseConfig = {
