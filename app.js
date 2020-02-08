@@ -1,8 +1,9 @@
 var express = require('express');
 var firebase = require("firebase");
 var app = express();
+var geoip = require('geoip-lite');
 
-//config
+//firebase config
 var firebaseConfig = {
   apiKey: "AIzaSyCyN99QGRjjCkT7ljW6_fzhGCuNohxfE8Q",
   authDomain: "uottahack2020-18263.firebaseapp.com",
@@ -12,6 +13,7 @@ var firebaseConfig = {
   messagingSenderId: "1098902235369",
   appId: "1:1098902235369:web:392eddfa9eac4d53996878"
 };
+
 
 
 init();
@@ -26,6 +28,17 @@ function init() {
 app.get('/', function(req, res, next) {
   res.send('Hello');
 });
+
+app.get('/latlong', function(req, res, next) {
+  //get ip address, feed into a geolookup
+  var ip = req.headers['x-forwarded-for'] || 
+     req.connection.remoteAddress || 
+     req.socket.remoteAddress ||
+     (req.connection.socket ? req.connection.socket.remoteAddress : null);
+  let geo = geoip.lookup(ip);
+  res.send(geo);
+});
+
 
 app.post('/users/drivers', function(req, res, next){
 
