@@ -24,7 +24,7 @@ router.post('/users/drivers?id', function(req, res, next){
        console.log('success');
     })
     .catch(function(error) {
-      res.send(69);
+      res.send(404);
       console.error("Error writing");
     })
 
