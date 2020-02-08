@@ -13,11 +13,11 @@ router.post('/users/drivers?', function(req, res, next){
   //use id to post
   db.collection('users').doc('users').collection('drivers').doc(req.params.uid)
     .set({
-      name: req.params.name,
-      email: req.params.email,
-      firstname: req.params.firstName,
-      lastname: req.params.lastName,
-      userType: req.params.userType
+      name: req.query.name,
+      email: req.query.email,
+      firstname: req.query.firstName,
+      lastname: req.query.lastName,
+      userType: req.query.userType
     })
     .then(function(){
        res.send(200);
