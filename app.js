@@ -29,11 +29,11 @@ app.get('/', function(req, res, next) {
 })
 
 app.get('/latlong', function(req, res, next) {
-  // var ip = req.headers['x-forwarded-for'] || 
-  //    req.connection.remoteAddress || 
-  //    req.socket.remoteAddress ||
-  //    (req.connection.socket ? req.connection.socket.remoteAddress : null);
-  res.send(req.connection.remoteAddress);
+  var ip = req.headers['x-forwarded-for'] || 
+     req.connection.remoteAddress || 
+     req.socket.remoteAddress ||
+     (req.connection.socket ? req.connection.socket.remoteAddress : null);
+  res.send(ip);
 });
 
 
