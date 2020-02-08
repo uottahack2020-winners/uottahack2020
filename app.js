@@ -4,8 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var firebase = require("firebase");
+// required for side effects <= what does that mean google?
+require('firebase/firestore');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+//config
+var config = {
+  apiKey: "AIzaSyCyN99QGRjjCkT7ljW6_fzhGCuNohxfE8Q",
+  authDomain: "https://uottahack2020-18263.firebaseapp.com",
+  databaseURL: "https://uottahack2020-18263.firebaseio.com",
+  projectId: "uottahack2020-18263",
+  storageBucket:"uottahack2020-18263.appspot.com",
+};
+
 
 var app = express();
 
@@ -26,6 +39,19 @@ app.use('/users', usersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+firebase.initializeApp(config);
+// just used this to test, should move somewhere else
+
+// var db = firebase.firestore();
+// db.collection('users').get()
+//      .then((snapshot) => {
+//        snapshot.forEach((doc) => {
+//                console.log(doc.id, '=>', doc.data());
+//        });
+//       }).catch((err) => {
+//          console.log('Error getting documents', err);
+//       });
 
 // error handler
 app.use(function(err, req, res, next) {
