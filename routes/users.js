@@ -11,13 +11,12 @@ router.post('/users/drivers?', function(req, res, next){
 
   var db = firebase.firestore();
   //use id to post
-  db.collection('users').doc('users').collection('drivers').doc(req.query.uid)
+  db.collection('users').doc('users').collection('drivers').doc(req.body.uid)
     .set({
-      name: req.query.name,
-      email: req.query.email,
-      firstname: req.query.firstName,
-      lastname: req.query.lastName,
-      userType: req.query.userType
+      email: req.body.email,
+      firstname: req.body.firstName,
+      lastname: req.body.lastName,
+      userType: req.body.userType
     })
     .then(function(){
        res.send(200);
