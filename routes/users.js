@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/users/drivers?id', function(req, res, next){
+router.post('/users/drivers?', function(req, res, next){
 
   var db = firebase.firestore();
   //use id to post
