@@ -31,12 +31,12 @@ app.post('/users/drivers', function(req, res, next){
 
   var db = firebase.firestore();
   //use id to post
-  db.collection('users').doc('users').collection('drivers').doc(req.body.uid)
+  db.collection('users').doc('users').collection('drivers').doc(req.query.uid)
     .set({
-      email: req.body.email,
-      firstname: req.body.firstName,
-      lastname: req.body.lastName,
-      userType: req.body.userType
+      email: req.query.email,
+      firstname: req.query.firstName,
+      lastname: req.query.lastName,
+      userType: req.query.userType
     })
     .then(function(){
        res.send(200);
