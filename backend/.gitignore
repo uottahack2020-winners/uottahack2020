@@ -1,0 +1,8 @@
+# Visual Studio Code related
+.classpath
+.project
+.settings/
+.vscode/
+
+# Node modules
+/node_modules
