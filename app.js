@@ -23,9 +23,7 @@ var googleConfig = {
 }
 
 
-init();
-firebase.initializeApp(firebaseConfig);
-
+// init();
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
@@ -134,8 +132,10 @@ app.post('/users/drivers', function(req, res, next){
       lastname: req.query.lastName,
       userType: req.query.userType
     })
-    .then(function(){
+    .then(function(doc){
+       res.body = doc;
        res.send(200);
+       
        console.log('success');
     })
     .catch(function(error) {
@@ -190,7 +190,6 @@ app.post('/users/business/:id', function(req,res, next) {
       console.error("Error writing");
     })
 });
-
 
 
 // just used this to test, should move somewhere else
