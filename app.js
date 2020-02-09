@@ -22,15 +22,13 @@ var googleConfig = {
   apikey: "AIzaSyCCa30P9-jhu-MNAF8GlZ1hP5nSF1Lz_jo"
 }
 
+
 init();
 firebase.initializeApp(firebaseConfig);
-var db = firebase.database();
 
 // Initialize Firebase
-function init() {
-  firebase.initializeApp(firebaseConfig);
-  var db = firebase.database();
-};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
 
 app.get('/', function(req, res, next) {
   res.send('Hello');
@@ -74,6 +72,7 @@ app.get('/latlong', async function(req, res, next) {
 });
 
 //Rest API CRUD stuff
+
 app.get('/items', function(req, res,next) {
   var itemsRef = db.ref('items');
   itemsRef.on('value', function(snapshot) {
@@ -81,8 +80,39 @@ app.get('/items', function(req, res,next) {
       var childData = childSnapshot.val();
       res.write(childData);
     });
-  });
+  })
+});
 
+app.post('/items/', function(req, res, next) {
+ //use id to post
+ db.collection('items').doc(req.query.trackingNumber)
+ .set({
+   status: req.query.email,
+   trackingNumber: req.query.firstName,
+   dateRequested: req.query.lastName,
+   datePickedUp: req.query.userType,
+   rateForDelivery: req.query.email,
+   weight: req.query.firstName,
+   volume: req.query.lastName,
+   itemType: req.query.userType,
+   deliveryPerson: req.query.email,
+   weight: req.query.firstName,
+   volume: req.query.lastName,
+   itemType: req.query.userType
+ })
+ .then(function(){
+    res.send(200);
+    console.log('success');
+ })
+ .catch(function(error) {
+   res.send(404);
+   console.error("Error writing");
+ })
+});
+
+app.get('/items/', async function(req, res,next) {
+  const snapshot = await db.collection('items').get();
+  res.send(snapshot.docs.map(doc => doc.data()));
 });
 
 app.get('/items/:id', function(req, res, next) {
@@ -95,10 +125,7 @@ app.get('/items/:id', function(req, res, next) {
   }
 });
 
-
 app.post('/users/drivers', function(req, res, next){
-
-  var db = firebase.firestore();
   //use id to post
   db.collection('users').doc('users').collection('drivers').doc(req.query.uid)
     .set({
@@ -115,19 +142,37 @@ app.post('/users/drivers', function(req, res, next){
       res.send(404);
       console.error("Error writing");
     })
-
 });
 
-app.get('/users/drivers', function(req,res, next) {
-
+app.get('/users/drivers', async function(req,res, next) {
+    const snap =  await db.collection('users').doc('users').collection('drivers').get();
+    res.send(snap.docs.map(doc => doc.data()));
 });
 
-app.get('/users/business', function(req,res, next) {
-
+app.get('/users/business/:id', async function(req,res, next) {
+  const snap =  await db.collection('users').doc('users').collection('drivers').get()
+    .then(function(doc) {
+      if (doc.exists) {
+          //console.log("Document data:", doc.data());
+          res.send(doc.data());
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+          res.send(404);
+      }
+     }).catch(function(error) {
+      console.log("Error getting document:", error);
+     });
+  
 });
 
-app.post('/users/business', function(req,res, next) {
-  var db = firebase.firestore();
+app.get('/users/business', async function(req,res, next) {
+  const snap =  await db.collection('users').get();
+  res.send(snap.docs.map(doc => doc.data()));
+});
+
+app.post('/users/business/:id', function(req,res, next) {
+  //var db = firebase.firestore();
   //use id to post
   db.collection('users').doc('users').collection('business').doc(req.query.uid)
     .set({
@@ -163,4 +208,4 @@ app.post('/users/business', function(req,res, next) {
 // error handler
 app.listen(3000, function() {
   console.log('server running');
-})
+});
