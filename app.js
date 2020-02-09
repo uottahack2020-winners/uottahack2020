@@ -17,15 +17,20 @@ var firebaseConfig = {
   appId: "1:1098902235369:web:392eddfa9eac4d53996878"
 };
 
+//google api config
+var googleConfig = {
+  apikey: "AIzaSyCCa30P9-jhu-MNAF8GlZ1hP5nSF1Lz_jo"
+}
 
 init();
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
 
 // Initialize Firebase
 function init() {
   firebase.initializeApp(firebaseConfig);
-  let db = firebase.database();
+  var db = firebase.database();
 };
-
 
 app.get('/', function(req, res, next) {
   res.send('Hello');
@@ -33,6 +38,7 @@ app.get('/', function(req, res, next) {
 
 app.get('/latlong', async function(req, res, next) {
   //get ip address, feed into a geolookup
+
   // var ip = req.headers['x-forwarded-for'] || 
   //    req.connection.remoteAddress || 
   //    req.socket.remoteAddress ||
@@ -58,8 +64,36 @@ app.get('/latlong', async function(req, res, next) {
   // let lat = latLong.results.geometry.location.lat;
   // let long = latLong.results.geometry.location.lng;
   // res.json({lat: lat, long: long});
+
+  var ip = req.headers['x-forwarded-for'] || 
+     req.connection.remoteAddress || 
+     req.socket.remoteAddress ||
+     (req.connection.socket ? req.connection.socket.remoteAddress : null);
+  let geo = geoip.lookup(ip);
+  res.write(geo.ll);
 });
 
+//Rest API CRUD stuff
+app.get('/items', function(req, res,next) {
+  var itemsRef = db.ref('items');
+  itemsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+      res.write(childData);
+    });
+  });
+
+});
+
+app.get('/items/:id', function(req, res, next) {
+  const itemId = req.params.id;
+  const item = data.find(_item => _item.id === itemId);
+  if (item) {
+    res.json(item);
+  } else {
+    res.json({ message: `item ${itemId} doesn't exist`})
+  }
+});
 
 
 app.post('/users/drivers', function(req, res, next){
