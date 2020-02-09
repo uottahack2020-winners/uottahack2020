@@ -43,18 +43,17 @@ app.post('/items/', function(req, res, next) {
  //use id to post
  db.collection('items').doc(req.query.trackingNumber)
  .set({
-   status: req.query.email,
-   trackingNumber: req.query.firstName,
-   dateRequested: req.query.lastName,
-   datePickedUp: req.query.userType,
-   rateForDelivery: req.query.email,
-   weight: req.query.firstName,
-   volume: req.query.lastName,
-   itemType: req.query.userType,
-   deliveryPerson: req.query.email,
-   weight: req.query.firstName,
-   volume: req.query.lastName,
-   itemType: req.query.userType
+   status: req.query.status,
+   trackingNumber: req.query.trackingNumber,
+   dateRequested: req.query.dateRequested,
+   datePickedUp: req.query.datePickedUp,
+   rateForDelivery: req.query.rateForDelivery,
+   weight: req.query.weight,
+   volume: req.query.volume,
+   itemType: req.query.itemType,
+   deliveryPerson: req.query.deliveryPerson,
+   sourceAddress: req.query.sourceAddress,
+   deliveryAddress: req.query.deliveryAddress,
  })
  .then(function(){
     res.send(200);
@@ -82,8 +81,6 @@ app.get('/items/:id', function(req, res, next) {
 });
 
 app.post('/users/drivers', function(req, res, next){
-
-
   //use id to post
   db.collection('users').doc('users').collection('drivers').doc(req.query.uid)
     .set({
